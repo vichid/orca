@@ -1,4 +1,4 @@
-import { app } from 'electron'
+import { isUpdaterEnabled } from './updater-enabled'
 import { isMacInstallRequested } from '../updater-mac-install'
 import type { UpdateCheckOptions } from '../../shared/update-status-types'
 import type { ReleaseChannel } from '../../shared/release-channel'
@@ -13,7 +13,7 @@ export abstract class UpdaterMenuChecks extends UpdaterScheduling {
     ) {
       return
     }
-    if (!app.isPackaged) {
+    if (!isUpdaterEnabled()) {
       this.sendStatus({ state: 'not-available', userInitiated: true })
       return
     }
